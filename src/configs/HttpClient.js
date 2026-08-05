@@ -11,3 +11,4 @@ export const httpClient = axios.create({
     withCredentials: axios.defaults.withCredentials = true
 })
 
+export default httpClient;
