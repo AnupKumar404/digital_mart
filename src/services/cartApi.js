@@ -1,5 +1,5 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
-import { httpClient } from "../configs/httpClient";
+import { httpClient } from "../configs/httpClient.js";
 
 export const cartApi = createApi({
     reducerPath: "cartApi",
