@@ -7,12 +7,18 @@ export const cartApi = createApi({
         baseUrl: httpClient.baseURL,
     }),
 
-    tagTypes: ["Cart"],
+    tagTypes: ["Cart", "Product"],
 
     endpoints: (builder) => ({
     getCartItems: builder.query({
         query: () => '/api/v1/cart/items',
         providesTags: ["Cart"],
+    }),
+
+
+    getProductById: builder.query({
+        query: (productId) => `/api/v1/products/${productId}`,
+        providesTags: ["Product"],
     }),
 
     updateCart: builder.mutation({
@@ -46,4 +52,4 @@ export const cartApi = createApi({
 });
 
 
-export const { useGetCartItemsQuery, useAddToCartMutation, useUpdateCartMutation, useRemoveCartItemMutation } = cartApi;
+export const { useGetCartItemsQuery, useAddToCartMutation, useUpdateCartMutation, useRemoveCartItemMutation, useGetProductByIdQuery} = cartApi;

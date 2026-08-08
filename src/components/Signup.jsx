@@ -144,7 +144,7 @@ function Signup() {
             </div>
             {/* Input: Added dark background, text, borders, and placeholder colors */}
             <input
-              type="text"
+              type="email"
               name="email"
               id="email"
               value={formData.email}

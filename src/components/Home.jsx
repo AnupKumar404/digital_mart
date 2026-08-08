@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { httpClient } from "../configs/HttpClient.js";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { add, remove } from "../store/CartSlice.js";
 import {useDispatch} from 'react-redux'
 import { MdAccountCircle, MdOutlineLocalGroceryStore, MdCurrencyRupee } from 'react-icons/md'
@@ -11,6 +11,7 @@ function Home() {
   const [products, setProducts] = useState([])
   const [addToCart] = useAddToCartMutation();
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -41,8 +42,8 @@ function Home() {
 
           <main className="rounded-lg shadow-md grid px-30 py-10 grid-cols-1 md:grid-cols-10 gap-x-50">
             {products.map((product) => (
-              <div className="card p-4 text-xl font-serif w-fit border-white bg-amber-50 rounded-xl" key={product.id}>
-                <img src={product.imageUrl} width="200" height="100" alt={product.name} />
+              <div className="card p-4 text-xl font-serif w-fit cursor-pointer border-white bg-amber-50 rounded-xl" key={product.id}>
+                <img onClick={() => navigate(`/${product.name}/${product.id}`)} src={product.imageUrl} width="200" height="100" alt={product.name} />
 
                 <p className="text-sm mt-5">{product.name}</p>
 

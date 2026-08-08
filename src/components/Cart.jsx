@@ -125,6 +125,8 @@ export function Cart() {
                   <p className="flex text-violet-600 font-bold mt-1"><MdCurrencyRupee className="mt-1.5" />{item.priceAtAdd.toFixed(2)}</p>
                 </div>
 
+                {/* <p>{item.description}</p> */}
+
                 <div className="flex px-6 py-2 bg-green-600 rounded-xl text-white text-xl gap-x-3">
                   <button onClick={() => handleClicks(item.productId, item.quantity-1)}>-</button>
                  <span>{item.quantity}</span>
@@ -163,7 +165,7 @@ export function Cart() {
               <div className="flex justify-between items-center mb-6">
                 <span className="text-lg font-bold text-gray-900">Total</span>
                 <span className="flex text-2xl font-bold text-violet-600">
-                  <MdCurrencyRupee className="mt-1.5" />{data?.totalAmount >= 100 ? data?.totalAmount.toFixed(2) : (data?.totalAmount.toFixed(2) + (data?.totalAmount * (10/100)))}
+                  <MdCurrencyRupee className="mt-1.5" />{data?.totalAmount >= 100 ? data?.totalAmount.toFixed(2) : (data?.totalAmount + (data?.totalAmount * (10/100))).toFixed(2)}
                 </span>
               </div>
 
