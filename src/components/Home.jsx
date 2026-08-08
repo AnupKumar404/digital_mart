@@ -5,7 +5,6 @@ import { add, remove } from "../store/CartSlice.js";
 import {useDispatch} from 'react-redux'
 import { MdAccountCircle, MdOutlineLocalGroceryStore, MdCurrencyRupee } from 'react-icons/md'
 import Navbar from "./Navbar.jsx";
-import { addToCart } from "../store/CartSlice.js";
 import { useAddToCartMutation } from "../services/cartApi.js";
 
 function Home() {

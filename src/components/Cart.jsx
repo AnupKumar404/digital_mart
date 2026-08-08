@@ -1,5 +1,5 @@
 
-import { add, update, remove, addToCart } from "../store/CartSlice";
+import { add, update, remove } from "../store/CartSlice";
 import {MdCurrencyRupee} from 'react-icons/md'
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useMemo } from "react";
