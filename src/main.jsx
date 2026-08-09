@@ -5,6 +5,7 @@ import Navbar from './components/Navbar'
 import { BrowserRouter } from 'react-router'
 import { Toaster } from 'react-hot-toast'
 import { Provider } from 'react-redux'
+import Footer from "./components/Footer.jsx";
 import {store} from './store/store'
 
 createRoot(document.getElementById('root')).render(
@@ -13,6 +14,7 @@ createRoot(document.getElementById('root')).render(
       <Toaster position='top-center'/>
       <Navbar />
       <AppRoutes />
+      <Footer />
     </BrowserRouter>
   </Provider>
 )

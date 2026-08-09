@@ -1,60 +1,123 @@
-import { MdAccountCircle, MdOutlineShoppingCart, MdSearch } from "react-icons/md";
+import { useState } from "react";
+import { 
+  MdAccountCircle, 
+  MdOutlineShoppingCart, 
+  MdSearch, 
+  MdMenu, 
+  MdClose 
+} from "react-icons/md";
 import { Link, useNavigate } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { cartApi } from "../services/cartApi";
 
 function Navbar() {
-
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const items = useSelector((state) => state.cart)
-  const totalValue = items.reduce((sum, item) => {return sum + item.price}, 0)
+  
+  const items = useSelector((state) => state.cart);
+  // const totalValue = items.reduce((sum, item) => sum + item.price, 0);
 
   const handleCartClick = () => {
-    dispatch(cartApi.util.prefetch('getCartItems', undefined, {force: true}))
-    navigate('/cart');
-  }
+    // Prevent clicking if cart is empty
+    if (items?.length > 0) {
+      dispatch(cartApi.util.prefetch('getCartItems', undefined, { force: true }));
+      navigate('/cart');
+    }
+  };
+
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
-    <div className="bg-white p-4 border-2 border-gray-200">
-      <nav className="flex justify-between">
-
-        <div className="flex mt-3 text-3xl font-bold font-serif">
-          <h1 className=" text-black">
-             Daily
-          </h1>
-          <h1 className="text-green-700">
-            Veggies
-          </h1>
-        </div>
-
-        <div className="flex text-2xl bg-gray-200 px-2 gap-x-2 rounded-xl">
-            <label htmlFor=""><MdSearch className="mt-5" size={30}/></label>
-            <input className="w-150 bg-transparent border-none outline-hidden ring-0" type="text" placeholder="Search 'Aalu' " />
-        </div>
-
-        <div className="text-2xl p-3 mt-1.5 text-shadow-black hover:bg-gray-100">
-            <Link to="/login">Login</Link>
-        </div>
+    <header className="bg-white border-b-2 border-gray-200 sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="gap-x-6 flex text-2xl text-shadow-black">
-          <div className="flex p-3 gap-x-6 mt-1.5 hover:bg-gray-100">
-            
-            <Link to="/" title="home">Home</Link>
-            <Link to="/about" title="about">About</Link>
-             <Link to="/profile" title="user profile">
-                <MdAccountCircle size={40} />
-            </Link>
+        {/* Top Row: Logo, Search (Desktop), Links (Desktop), Cart */}
+        <div className="flex items-center justify-between h-20 gap-4">
+          
+          {/* Hamburger Icon (Mobile Only) */}
+          <div className="flex items-center md:hidden">
+            <button 
+              onClick={toggleMenu} 
+              className="text-gray-600 hover:text-black transition focus:outline-none"
+            >
+              {isMenuOpen ? <MdClose size={32} /> : <MdMenu size={32} />}
+            </button>
           </div>
 
-          <div className="flex items-center bg-violet-600 hover:bg-violet-800 text-white rounded-xl py-1 px-5">
-            {items?.length === 0 ? <button className="cursor-not-allowed" title="cart"><MdOutlineShoppingCart size={25} /></button>
-            : <button className="cursor-pointer" onClick={handleCartClick}><MdOutlineShoppingCart size={25} /></button>}
-              <p className="text-xl">{items.length} item</p>
+          {/* Logo */}
+          <Link to="/" className="flex text-2xl md:text-3xl font-bold font-serif shrink-0">
+            <span className="text-black">Daily</span>
+            <span className="text-green-700">Veggies</span>
+          </Link>
+
+          {/* Search Bar (Desktop Only) */}
+          <div className="hidden md:flex flex-1 max-w-xl bg-gray-100 px-4 py-2.5 rounded-xl items-center gap-2 transition-shadow focus-within:ring-2 focus-within:ring-green-500">
+            <MdSearch className="text-gray-500" size={24} />
+            <input
+              className="w-full bg-transparent border-none outline-none text-lg text-gray-700 placeholder-gray-500"
+              type="text"
+              placeholder="Search 'Aalu'"
+            />
+          </div>
+
+          {/* Navigation Links (Desktop Only) */}
+          <nav className="hidden md:flex items-center gap-6 text-xl font-medium text-gray-700">
+            <Link to="/" className="hover:text-green-700 transition">Home</Link>
+            <Link to="/about" className="hover:text-green-700 transition">About</Link>
+            <Link to="/login" className="hover:text-green-700 transition">Login</Link>
+            <Link to="/profile" title="User Profile" className="hover:text-green-700 transition">
+              <MdAccountCircle size={32} />
+            </Link>
+          </nav>
+
+          {/* Cart Button (Always Visible) */}
+          <button
+            onClick={handleCartClick}
+            disabled={items?.length === 0}
+            className={`flex items-center gap-2 rounded-xl py-2 px-4 transition-all shrink-0 ${
+              items?.length === 0
+                ? "bg-gray-200 text-gray-500 cursor-not-allowed"
+                : "bg-violet-600 hover:bg-violet-700 text-white cursor-pointer shadow-md"
+            }`}
+            title="Cart"
+          >
+            <MdOutlineShoppingCart size={24} />
+            <span className="text-lg md:text-xl font-medium">
+              {items?.length || 0} <span className="hidden sm:inline">item</span>
+            </span>
+          </button>
+          
+        </div>
+
+        {/* Search Bar (Mobile Only - drops to new row) */}
+        <div className="md:hidden pb-4">
+          <div className="flex w-full bg-gray-100 px-4 py-2.5 rounded-xl items-center gap-2 focus-within:ring-2 focus-within:ring-green-500">
+            <MdSearch className="text-gray-500" size={24} />
+            <input
+              className="w-full bg-transparent border-none outline-none text-lg text-gray-700 placeholder-gray-500"
+              type="text"
+              placeholder="Search 'Aalu'"
+            />
           </div>
         </div>
-      </nav>
-    </div>
+      </div>
+
+      {/* Mobile Menu Dropdown */}
+      {isMenuOpen && (
+        <div className="md:hidden bg-gray-50 border-t border-gray-200 shadow-inner">
+          <nav className="flex flex-col px-6 py-4 gap-4 text-lg font-medium text-gray-700">
+            <Link to="/" onClick={toggleMenu} className="hover:text-green-700 block">Home</Link>
+            <Link to="/about" onClick={toggleMenu} className="hover:text-green-700 block">About</Link>
+            <Link to="/login" onClick={toggleMenu} className="hover:text-green-700 block">Login</Link>
+            <Link to="/profile" onClick={toggleMenu} className="flex items-center gap-2 hover:text-green-700">
+              <MdAccountCircle size={28} />
+              Profile
+            </Link>
+          </nav>
+        </div>
+      )}
+    </header>
   );
 }
 
