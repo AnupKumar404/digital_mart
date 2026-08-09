@@ -1,7 +1,7 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router";
-import { MdOutlinePerson, MdOutlineLock, MdPhone, MdTransgender } from "react-icons/md";
+import { MdOutlinePerson, MdVisibilityOff, MdOutlineRemoveRedEye, MdOutlineLock, MdPhone, MdTransgender } from "react-icons/md";
 import { httpClient } from "../configs/HttpClient";
 
 function Signup() {
@@ -15,6 +15,7 @@ function Signup() {
   });
 
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false); // Now utilized
   const navigate = useNavigate();
 
@@ -224,7 +225,7 @@ function Signup() {
                 <MdOutlineLock size={20} />
               </div>
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 name="passwordHash"
                 value={formData.passwordHash}
                 onChange={handleFormInput}
@@ -232,6 +233,16 @@ function Signup() {
                 placeholder="••••••••"
                 required
               />
+
+              {/* Show/Hide Password Toggle */}
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors focus:outline-none"
+                title={showPassword ? "Hide password" : "Show password"}
+                >
+                {showPassword ? <MdVisibilityOff size={20} /> : <MdOutlineRemoveRedEye size={20} />}
+              </button>
             </div>
           </div>
 
