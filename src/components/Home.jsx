@@ -82,6 +82,10 @@ function Home() {
               >
                 {product.name}
               </h3>
+
+              <span className="text-sm text-gray-600 mt-4">
+                {parseFloat(product.unitValue).toString() +' '+ product.unitType} 
+              </span>
               
               {/* Footer: Price & Button (mt-auto forces this to the bottom) */}
               <div className="mt-auto pt-4 flex flex-col xl:flex-row justify-between items-start xl:items-center gap-3">
