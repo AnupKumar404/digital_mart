@@ -5,6 +5,7 @@ export const cartApi = createApi({
     reducerPath: "cartApi",
     baseQuery: fetchBaseQuery({
         baseUrl: 'https://dailyveggies4u.com',
+        credentials: 'include',
     }),
 
     tagTypes: ["Cart", "Product"],
