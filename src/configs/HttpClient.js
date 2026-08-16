@@ -1,10 +1,7 @@
 import axios from 'axios';
 
-// const baseURL = 'http://localhost:8080';
-const baseURL = 'https://dailyveggies4u.com';
-
 export const httpClient = axios.create({
-    baseURL: baseURL,
+    baseURL: 'https://dailyveggies4u.com',
     headers: {
         'Content-Type': 'application/json',
     },

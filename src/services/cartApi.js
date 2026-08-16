@@ -4,7 +4,7 @@ import { httpClient } from "../configs/HttpClient.js";
 export const cartApi = createApi({
     reducerPath: "cartApi",
     baseQuery: fetchBaseQuery({
-        baseURL: httpClient.baseURL,
+        baseUrl: httpClient.baseURL,
     }),
 
     tagTypes: ["Cart", "Product"],
