@@ -12,6 +12,7 @@ export const cartApi = createApi({
     endpoints: (builder) => ({
     getCartItems: builder.query({
         query: () => '/api/v1/cart/items',
+        withCredentials: true,
         providesTags: ["Cart"],
     }),
 
@@ -28,6 +29,7 @@ export const cartApi = createApi({
             method: 'PUT',
             body: product,
         }),
+        withCredentials: true,
         invalidatesTags: ["Cart"],
     }),
 
@@ -37,6 +39,7 @@ export const cartApi = createApi({
             method: 'POST',
             body: product,
         }),
+        withCredentials: true,
         invalidatesTags: ["Cart"],
     }),
 
@@ -45,6 +48,7 @@ export const cartApi = createApi({
             url: `/api/v1/cart/items/${productId}`,
             method: 'DELETE',
         }),
+        withCredentials: true,
         invalidatesTags: ["Cart"],
     }),
 
