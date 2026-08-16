@@ -129,7 +129,7 @@ export function Cart() {
                 {/* Bottom Section for Mobile: Quantity + Remove */}
                 <div className="flex items-center justify-between sm:justify-end gap-4 mt-4 sm:mt-0 pt-4 sm:pt-0 border-t sm:border-t-0 border-gray-100 w-full sm:w-auto">
 
-                  <p>Total Qty: {item.unitValue}</p>
+                  <p>Total Qty: {`${item.unitValue < 1000 ? (item.unitValue +''+item.unitType) : (item.unitValue +''+'Kg')}`}</p>
                   
                   {/* Quantity Controls */}
                   <div className="flex items-center bg-gray-100 rounded-xl border border-gray-200">
