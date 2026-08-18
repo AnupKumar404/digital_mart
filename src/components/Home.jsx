@@ -151,7 +151,7 @@ function Home() {
               </h3>
 
               <span className="text-sm text-gray-600 mt-4">
-                {parseFloat(product.unitValue).toString() + " " + product.unitType} 
+                {parseFloat(product.unitValue).toString() + " " + product.unitType == 'GRAM' ? product.unitType.charAt(0).toLowerCase() : product.unitType.charAt(0).toLowerCase() + 'cs'} 
               </span>
               
               {/* Footer: Price & Button */}
