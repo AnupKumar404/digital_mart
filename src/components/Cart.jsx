@@ -6,6 +6,7 @@ import { debounce } from 'lodash';
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
 import { useGetCartItemsQuery, useRemoveCartItemMutation, useUpdateCartMutation } from "../services/cartApi";
+import httpClient from "../configs/HttpClient";
 
 export function Cart() {
   const dispatch = useDispatch();
@@ -41,6 +42,18 @@ export function Cart() {
     [dispatch, removeCartItem, updateCartItem]
   );
 
+  const refreshSession = async () => {
+    const res = await httpClient.post("/api/v1/auth/refresh", 
+      null, {
+        withCredentials: true
+      }
+    );
+
+    if (res){
+        console.log("token rotation done....")
+    }
+  }
+
   // Calculations for Order Summary
   const subTotal = data?.totalAmount || 0;
   const isFreeShipping = subTotal >= 100;
@@ -65,7 +78,7 @@ export function Cart() {
         <div className="text-6xl mb-4">⚠️</div>
         <p className="text-2xl md:text-3xl font-bold mb-6 text-gray-800">Couldn't load your cart.</p>
         <button 
-          onClick={refetch} 
+          onClick={refreshSession} 
           className="bg-violet-600 hover:bg-violet-700 px-8 py-3 rounded-full text-white font-bold transition-colors shadow-md"
         >
           Try Again

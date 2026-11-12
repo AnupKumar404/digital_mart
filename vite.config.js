@@ -8,7 +8,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api':{
-        target: 'http://localhost:8080',
+        target: 'https://dailyveggies4u.com',
         changeOrigin: true,
         secure: false,
       }
@@ -16,5 +16,4 @@ export default defineConfig({
   },
   
   plugins: [react(), tailwindcss()],
-  base: process.env.VITE_BASE_PATH || '/digital_mart',
 })

@@ -64,7 +64,6 @@ function Navbar() {
           {/* Navigation Links (Desktop Only) */}
           <nav className="hidden md:flex items-center gap-6 text-xl font-medium text-gray-700">
             <Link to="/" className="hover:text-green-700 transition">Home</Link>
-            <Link to="/about" className="hover:text-green-700 transition">About</Link>
             <Link to="/login" className="hover:text-green-700 transition">Login</Link>
             <Link to="/profile" title="User Profile" className="hover:text-green-700 transition">
               <MdAccountCircle size={32} />
